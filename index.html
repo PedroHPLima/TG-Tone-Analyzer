@@ -1,0 +1,110 @@
+<!doctype html>
+
+<!-- ASSIGN OUR ANGULAR MODULE -->
+<html ng-app="scotchTodo">
+<head>
+	<!-- META -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+	<title>IBM Watson</title>
+
+	<!-- SCROLLS -->
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<style>
+		html 					{ overflow-y:scroll; }
+		body 					{ padding-top:50px; }
+		#todo-list 				{ margin-bottom:30px; }
+		#todo-form 	 			{ margin-bottom:50px; }
+	</style>
+
+	<!-- SPELLS -->
+	<!-- <script src="node_modules/angular/angular.min.js"></script> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script src="node_modules/chart.js/dist/Chart.min.js"></script>
+	<script src="node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
+	<script src="js/controllers/main.js"></script> <!-- load up our controller -->
+	<script src="js/services/todos.js"></script> <!-- load our todo service -->
+	<script src="js/core.js"></script> <!-- load our main application -->
+
+	
+
+</head>
+	<!-- SET THE CONTROLLER -->
+	<body ng-controller="mainController">
+		<div class="container">
+
+			<!-- HEADER AND TODO COUNT -->
+			<div class="jumbotron text-center">
+				<h1 class="test"><An>Análise de tom</An></span></h1>
+			</div>
+
+			<!-- FORM TO CREATE TODOS -->
+			<div id="todo-form" class="row" ng-if="!spinner">
+				<div class="col-sm-8 col-sm-offset-2 text-center">
+					<form>
+						<div class="form-group">
+							<!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
+							<!-- <input type="text" class="form-control input-lg text-center" placeholder="I want to buy a puppy that will love me forever" ng-model="formData.text"> -->
+							<textarea class="form-control input-lg" placeholder="Cole seu texto aqui." ng-model="formData.text"></textarea>
+						</div>
+
+						<!-- createToDo() WILL CREATE NEW TODOS -->
+						<button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Analisar</button>
+					</form>
+				</div>
+			</div>
+
+			<dir class="center" ng-if="spinner">
+				<img src="images/default.svg">
+			</dir>
+			
+			<div class="container text-center">
+				<div class="row" ng-if="!spinner && document">
+
+					<div class="col-sm-4">
+						<h3> {{document.emotionTone.category_name}} </h3>
+						<div ng-repeat="tones in document.emotionTone.tones">
+							<p>{{tones.tone_name}} - {{tones.score}}</p>
+						</div>
+					</div>
+
+					<div class="col-sm-4">
+						<h3> {{document.languageTone.category_name}} </h3>
+						<div ng-repeat="tones in document.languageTone.tones">
+							<p>{{tones.tone_name}} - {{tones.score}}</p>
+						</div>
+					</div>
+
+					<div class="col-sm-4">
+						<h3> {{document.socialTone.category_name}} </h3>
+						<div ng-repeat="tones in document.socialTone.tones">
+							<p>{{tones.tone_name}} - {{tones.score}}</p>
+						</div>
+					</div>
+	
+				</div>
+			</div>
+
+		</div>
+
+
+
+		<!-- CHART -->
+		<!-- <div class="chart-container">
+			<canvas 
+				class="chart chart-line"
+				height="80px"
+				chart-data="" 
+				chart-labels=""
+				chart-options="chartOptions"
+				chart-dataset-override="datasetOverride"
+				chart-colors="['#D9534F']">
+			</canvas>
+		</div> -->
+
+
+	</body>
+</html>
